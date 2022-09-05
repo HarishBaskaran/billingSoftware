@@ -1,12 +1,26 @@
+import React, { useRef } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ReactToPrint from 'react-to-print';
+
 
 function App() {
+  const componentRef = useRef();
+
   return (
-    <div className="App">
+    <div>
+    <ReactToPrint 
+    trigger={()=> {
+      return <button>Print it!</button>
+    }}
+    content={() => componentRef.current}
+    documentTitle="PRINTED DOCUMENT"
+    pageStyle="print"
+    />
+    <div className="App" >
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        <p ref={componentRef}>
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
@@ -18,6 +32,7 @@ function App() {
           Learn React
         </a>
       </header>
+    </div>
     </div>
   );
 }
